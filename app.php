@@ -2,21 +2,20 @@
 declare(strict_types= 1);
 
 namespace App;
-use App\Controllers\UserController;
-
-require "Router.php";
-require_once CONTROLLERS_DIR . "UserController.php";
+session_start();
 
 $router = new Router();
 
 $router->get("/", function() {
-    return 'HOME';
+    return (new View())->render("home");
 });
 
-$user_controller = new UserController();
+$user_controller = new \App\Controllers\UserController();
 
 $router
-    ->get("/users/login", [$user_controller,"getLoginForm"])
+    ->get("/user/login", [$user_controller,"getLoginForm"])
+    ->post("/user/login", [$user_controller, "login"])
+    ->post("/user/logout", [$user_controller, "logout"])
     ;
 
 $request_url = $_SERVER['REQUEST_URI'];

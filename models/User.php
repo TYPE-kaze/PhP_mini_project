@@ -5,6 +5,10 @@ namespace App\Models;
 
 class User {
     public string $id = "1";
-    public string $username = "username";
-    public string $password = "password";
+    private string $username = "username";
+    private string $password = "password";
+
+    public function validate(string $username, string $password): bool {
+        return ($this->username === $username) && ($this->password === $password);
+    }
 }

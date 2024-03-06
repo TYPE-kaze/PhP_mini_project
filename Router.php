@@ -11,6 +11,12 @@ class Router {
     }
 
     public function reslove(string $route, string $httpVerb) {
+        
+        if (!array_key_exists($route, $this->routes) || !array_key_exists($httpVerb, $this->routes[$route])){
+        //default error page 
+            echo (new \App\View)->render("/error");
+            return;
+        }
         $controller = $this->routes[$route][$httpVerb];
         if(is_array($controller)) {
             echo call_user_func_array([$controller[0], $controller[1]], []);
@@ -27,5 +33,9 @@ class Router {
     public function post(string $route, callable | array $controller) {
         $this->register($route, "POST", $controller);
         return $this;
+    }
+
+    public function redirect(string $route) {
+        header('Location: ' . $route);
     }
 }
