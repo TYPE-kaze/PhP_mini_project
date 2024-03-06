@@ -47,7 +47,6 @@ class UserController {
         if (!(\App\Helper::isLoggedIn())) {
             \App\Flash::set_flash("Không thể truy cập tài nguyên này nếu chưa đăng nhập");
             (new \App\Router())->redirect("/");
-            var_dump("Co vao day ko ?");
             exit(1);
         };
     }
