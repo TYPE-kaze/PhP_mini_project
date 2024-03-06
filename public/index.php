@@ -9,6 +9,8 @@
 
     require_once "../Router.php";
     require_once "../View.php";
+    require_once "../Flash.php";
+    require_once "../Helper.php";
     require_once CONTROLLERS_DIR . "UserController.php";
     require_once MODELS_DIR . "User.php";
 

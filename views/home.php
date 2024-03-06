@@ -13,12 +13,14 @@
     <h1>Trang chủ</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit veniam ratione maxime animi? Nostrum ab a sunt at, ipsam illum porro dolorem officiis ipsum neque et, modi animi laborum omnis?</p>
     
-    <?php if (!array_key_exists('is_logged_in', $_SESSION) || $_SESSION['is_logged_in'] === false): ?>
-        <a href="/user/login">Đăng nhập</a>
-    <?php else :?>
+    <?php if (\App\Helper::isLoggedIn()): ?>
         <form action="/user/logout" method="POST">
             <button type="submit">Đăng xuất</button>            
         </form>
+    <?php else :?>
+        <a href="/user/login">Đăng nhập</a>
     <?php endif ?>
+    <a href="/tweet">Danh sách Tweet</a>
+
 </body>
 </html>

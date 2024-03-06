@@ -16,6 +16,10 @@ $router
     ->get("/user/login", [$user_controller,"getLoginForm"])
     ->post("/user/login", [$user_controller, "login"])
     ->post("/user/logout", [$user_controller, "logout"])
+    ->get("/tweet", function() {//test 
+        (new \App\Controllers\UserController)->redirectIfNotLoggedIn();
+        return (new View())->render("/tweet/index");
+    }) 
     ;
 
 $request_url = $_SERVER['REQUEST_URI'];

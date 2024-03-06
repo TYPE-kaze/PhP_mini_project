@@ -14,14 +14,14 @@ class UserController {
 
         if($user->validate($username, $password)) {
             //dung tai khoan mat  khau
-            $params['flash'] = "Đăng nhập thành công";
+            \App\Flash::set_flash("Đăng nhập thành công");
             $_SESSION['is_logged_in'] = true;
             //nho dang nhap ke ca sau khi dong trinh duyet
             if (array_key_exists('miss_me', $_POST) && $_POST['miss_me'] === 'on') {
                 setcookie(session_name(), session_id(), time() + 7 * 24 * 60 *60, "/");            
             }
         } else {
-            $params['flash'] = "Tài khoản hoặc mật khẩu không đúng";
+            \App\Flash::set_flash("Tài khoản hoặc mật khẩu không đúng");
         };
 
         (new \App\Router())->redirect("/");
@@ -41,5 +41,14 @@ class UserController {
         session_destroy();
 
         (new \App\Router())->redirect("/");
+    }
+
+    public function redirectIfNotLoggedIn() { 
+        if (!(\App\Helper::isLoggedIn())) {
+            \App\Flash::set_flash("Không thể truy cập tài nguyên này nếu chưa đăng nhập");
+            (new \App\Router())->redirect("/");
+            var_dump("Co vao day ko ?");
+            exit(1);
+        };
     }
 }
