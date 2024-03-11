@@ -46,7 +46,7 @@ class UserController {
     public function redirectIfNotLoggedIn() { 
         if (!(\App\Helper::isLoggedIn())) {
             \App\Flash::set_flash("Không thể truy cập tài nguyên này nếu chưa đăng nhập");
-            (new \App\Router())->redirect("/");
+            (new \App\Router())->redirect("/user/login");
             exit(1);
         };
     }

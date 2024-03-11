@@ -9,10 +9,10 @@ class Router {
     private function register(string $route, string $httpVerb, callable | array $controller) {
         $this->routes[$route][$httpVerb] = $controller;
     }
-
+    
     public function reslove(string $route, string $httpVerb) {
         $route = explode('?', $route)[0]; //get  rid of the query parameters in the url
-        var_dump($route);
+        // var_dump($route);
         if (!array_key_exists($route, $this->routes) || !array_key_exists($httpVerb, $this->routes[$route])){
         //default error page 
             echo (new \App\View)->render("/error");
